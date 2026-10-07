@@ -43,10 +43,6 @@ projectiles = []
 projectile_w = 4 
 projectile_h = 8
 
-# Keypress status
-left_pressed = False
-right_pressed = False
-
 # Sound: weapon / laser 
 # https://sfxr.me/#34T6Pm25W5VunHtL14gUxhLx6MqNduzaeRPcUbqtT4RN55w6nP9NipaUrx5ZBBvohWwXgMrd5BS2e7HwRwEVyzmKM3FV8LiU7Gh5ob2VvvMi6ftqdhbVB54ZM 
 sound_laser = pg.mixer.Sound("sounds/laser.wav")
@@ -76,24 +72,9 @@ while running:
             if event.key == pg.K_ESCAPE:
                 running = False
 
-            elif event.key == pg.K_LEFT:
-                left_pressed = True
-
-            elif event.key == pg.K_RIGHT:
-                right_pressed = True
-
             elif event.key == pg.K_SPACE:
                 projectile_fired = True
 
-        # Keyreleases
-        elif event.type == pg.KEYUP:
-
-            if event.key == pg.K_LEFT:
-                left_pressed = False 
-
-            elif event.key == pg.K_RIGHT:
-                right_pressed = False 
-    
 
     ## Updating (movement, collisions, etc.) ##
 
@@ -102,10 +83,11 @@ while running:
         alien['y'] += 1
 
     # Spaceship
-    if left_pressed:
+    keys = pg.key.get_pressed()
+    if keys[pg.K_LEFT]:
         ship_x -= 8
 
-    if right_pressed:
+    if keys[pg.K_RIGHT]:
         ship_x += 8
 
     # Keep the spaceship inside the screen
