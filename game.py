@@ -143,6 +143,15 @@ while running:
                     # so skip to the next projectile 
                     break
 
+    # Game over if an alien hits the spaceship or reaches the bottom
+    for alien in aliens:
+        hits_ship = (alien['x'] < ship_x + ship_w and
+                     ship_x < alien['x'] + alien_w and
+                     alien['y'] < ship_y + ship_h and
+                     ship_y < alien['y'] + alien_h)
+        if hits_ship or alien['y'] > 600:
+            running = False
+
     # Firing (spawning new projectiles)
     if projectile_fired:
         sound_laser.play()
