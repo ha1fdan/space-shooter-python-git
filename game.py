@@ -108,6 +108,9 @@ while running:
     if right_pressed:
         ship_x += 8
 
+    # Keep the spaceship inside the screen
+    ship_x = max(0, min(400 - ship_w, ship_x))
+
     # Projectile movement
     # Reverse iteration needed to handle each projectile correctly
     # in cases where a projectile is removed.
